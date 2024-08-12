@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const DynamicInput = ({ value, onChange, placeholder, rows = 4, ...props }) => {
     
-    const [input, setInput] = useState()
-
 
     return (
         <textarea
-            value={input}
+            value={value}
+            onChange={onChange}
             placeholder={placeholder}
             rows={rows}
             {...props}

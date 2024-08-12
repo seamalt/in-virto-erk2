@@ -1,5 +1,4 @@
 /* App.css */
-@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body {
@@ -14,7 +13,7 @@ body {
   }
   
   .App {
-    max-width: 800px;
+    max-width: 60vw;
     margin: 0 auto;
     padding: 20px;
   }
@@ -36,7 +35,7 @@ body {
     font-weight: 500;
   }
 
-  h1[type="logo"], p[type="logo"] {
+  h1[type="logo"], p[type="logo"], span {
     color:#7aa7c5;
     font-weight:900;
     font-style:italic;
@@ -45,7 +44,7 @@ body {
     margin-bottom: 0px;
   }
 
-  h1[type="logo"]:hover, p[type="logo"]:hover {
+  h1[type="logo"]:hover, p[type="logo"]:hover, span:hover {
     color:#cd90be;
   }
 

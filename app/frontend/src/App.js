@@ -6,6 +6,8 @@ import ResultDisplay from './components/ResultDisplay';
 import {fetchData} from "./api";
 import Antibody from './components/Antibody';
 import './App.css';
+// import favicon from '../public/favicon.png';
+
 
 function App() {
     const [result, setResult] = useState(null);
@@ -35,16 +37,26 @@ function App() {
 
     return (
         <div className = "App">
-            <h1 type="Logo">"in-virto"</h1>
-            <p type="Logo">a virtual enzyme analyzer</p>
-            <h1>Random Forest Bioactivity Predictor</h1>
+            <div className = "Heading" style={{textAlign: 'center', margin: "0 auto" }}>
+                <img
+                    src={`${process.env.PUBLIC_URL}/logo192.png`}
+                    style={{ width: '50px', height: '50px', verticalAlign: 'center', marginRight: '10px' }}
+                />
+                <h1 type="Logo" style={{display:'inline-block', verticalAlign: 'center', padding:'0px', marginBottom:'0px'}}>"in-virto" enzyme analysis</h1>
+            </div>
+            <p type="logo" style={{marginTop:'0px'}}>a virtual drug discovery tool</p>
+            <h1>Random Forest Bioactivity Predictor: <space/>
+                <span>
+                    Interactions with ERK2
+                </span>
+            </h1>
             <button className="button-small" onClick={ToggleAsked} 
                 style={{fontSize:16, padding:'0px 4px', borderRadius:'24px'}}>?</button>
             {asks &&
             <h3>
                 In drug discovery, it's important to identify candidates with high affinity
                 for the protein of interest. Here, I created a <b>RESTFul API</b> that uses a <b>random forest machine learning model</b> that takes
-                a drug's chemical composition (in SMILES format) and outputs activity factors from valid entries.<br/>
+                a drug's chemical composition (in SMILES format) and outputs predicted activity factors from valid entries.<br/>
                 <br/>
                 The target of interest is <b>ERK2</b>,
                 a major cell signalling protein involved in multiple forms of <a href="https://en.wikipedia.org/wiki/MAPK1">

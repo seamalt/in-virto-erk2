@@ -1,6 +1,8 @@
 //const API_URL = 'http://localhost:5000/api';
 
 export const fetchData = async (input) => {
+  console.log({input});
+
   const response = await fetch(`/api/predict`, {
     method: 'POST',
     headers: {
@@ -8,6 +10,8 @@ export const fetchData = async (input) => {
     },
     body: JSON.stringify({ input }),
   }); 
+
+  console.log(response);
     
   if (!response.ok) {
     throw new Error('Improper input provided');
