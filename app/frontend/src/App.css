@@ -1,0 +1,231 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.3;
+    color: #1a1a1a;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .App {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #34495e;
+  }
+
+  h3 {
+    text-align: center;
+    font-size: 16px;
+    color: #34495e;
+    font-weight: 500;
+  }
+
+  h1[type="logo"], p[type="logo"] {
+    color:#7aa7c5;
+    font-weight:900;
+    font-style:italic;
+    transition: ease-in 0.5s;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+  h1[type="logo"]:hover, p[type="logo"]:hover {
+    color:#cd90be;
+  }
+
+  p[type=signal] {
+    color: #cd90be;
+  }
+  
+  form {
+    background-color: #f4f4f4;
+    background: transparent;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0);
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    background-color: transparent;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: transparent;
+    border-radius: 4px;
+    outline: none;
+    /* box-sizing: border-box; */
+    transition: background-color 0.4s ease;
+
+    text-align: center;
+    field-sizing: content;
+    text-wrap: break-word;
+    resize: none;
+
+    cursor: text;
+    caret-color:#34495e;
+    color:#34495e;
+  }
+
+  textarea:focus, textarea:hover {
+    background-color: #d1edf7;
+  }
+  
+  button {
+    font-family: 'Space Mono', monospace;
+    display: block;
+    margin: auto;
+    width: fit-content;
+    padding: 10px;
+    background-color: #95bed9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 1.0s ease;
+  }
+
+  button[type=download]{
+    width: 100%;
+  }
+
+  .button-small{
+    background-color:#cd90be;
+    transition: ease-in 0.15s;
+  }
+
+  .button-small:hover{
+    background-color:#95bed9;
+  }
+  
+  button:hover {
+    background-color: #cd90be;
+  }
+  
+  pre {
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-emphasis-color: #709aa4;
+  }
+
+  
+  
+  div:has(pre) {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0);
+  }
+  
+  @media (max-width: 600px) {
+    .App {
+      padding: 10px;
+    }
+    
+    form, div:has(pre) {
+      padding: 15px;
+    }
+  }
+
+  .table-container {
+    height: 300px; 
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 4px;  
+    /*border: 1px solid #ddd; */ 
+  }
+
+  .table-container::-webkit-scrollbar {
+    width: 15px;
+    border-radius: 10px;
+  }
+
+
+  .table-container::-webkit-scrollbar-thumb {
+    background: #f4ddef; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Rounded corners for the handle */
+    border: 2px solid #ffffff; /* Optional: Adds a border around the handle */
+  }
+
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #cd90be; /* Color of the scrollbar handle on hover */
+  }
+
+  .table-container::-webkit-scrollbar-track {
+    background: #f4ddef; /* Color of the track */
+    border-radius: 10px; /* Rounded corners for the track */
+  }
+
+  /* for Table */
+  table {
+    background-color: #d1edf7;
+    text-align: left;
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+    transition: ease-in 0.1s;
+  }
+
+  /* Style table headers and cells */
+  th, td {
+    /*padding: 12px;*/
+    border: 1px solid #d1edf7;
+    text-align: left;
+    transition: ease-in 0.1s;
+    word-wrap: break-word;
+    max-width: 30vw;
+  }
+
+  tbody tr:hover {
+    background-color: #7aa7c5;
+  }
+
+  th, td:hover {
+    background-color: #95bed9;
+  }
+
+  /* for Antibody */
+  .circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+  }
+
+  .circle {
+    /*fill: radial-gradient(#709aa4, #cd90be);*/
+    fill: #709aa4;
+    stroke: rgb(255, 255, 255);
+  }
+
+  .dot {
+    fill: #709aa4;
+  }
+
+  a {
+    color:#cd90be;
+    text-decoration: none;
+  }
+

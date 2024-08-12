@@ -1,0 +1,9 @@
+# remember to add all imported packages here
+# including versions installed
+pandas==2.1.4
+numpy==1.26.4
+scikit-learn==1.4.0
+Flask==2.2.5
+padelpy==0.1.13
+rdkit#==2024.03.5
+#pickle is built-in
