@@ -1,14 +1,16 @@
 {
     "version": 2,
     "builds": [
-      { "src": "backend/api/*.py", "use": "@vercel/python", 
+      { "src": "backend/api/app.py", "use": "@vercel/python", 
         "config": {
-            "maxDuration": 60
+            "maxDuration": 60,
+            "maxLambdaSize": "15mb",
+            "runtime": "python3.12.4"
         }
       },
       { "src": "frontend/package.json", "use": "@vercel/static-build", 
         "config": {
-            "distdir": "frontend/build"
+            "distDir": "build"
         }
       }
     ],
