@@ -20,7 +20,8 @@
     ],
     "build": {
     "env": {
-      "BABEL_DISABLE_CACHE": "1"
+      "BABEL_DISABLE_CACHE": "1",
+      "CI": "false"
       }
     }
   }
