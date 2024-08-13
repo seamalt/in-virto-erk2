@@ -19,7 +19,7 @@ function Footer () {
                     Details for Nerds:<br/>
                     Backend:{"{"}python with Flask{"}"} <br/>
                     Frontend:{"{"}JavaScript with React, HTML, CSS{"}"} <br/>
-                    Host:{"{"}{"}"} 
+                    Host:{"{"}Vercel{"}"} 
                     </h3>}
             {isVisible && <p style={{
                 fontSize:12

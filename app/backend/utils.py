@@ -3,6 +3,7 @@ from padelpy import padeldescriptor, from_smiles
 
 def filter_bad_smiles(smiles):
     print("entered filter smiles")
+    smiles = list(dict.fromkeys(smiles))
     filtered = []
     print(smiles)
     for s in smiles:
