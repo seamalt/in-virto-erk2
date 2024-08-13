@@ -17,6 +17,11 @@
     "routes": [
       { "src": "/api/(.*)", "dest": "backend/api/app.py" },
       { "src": "/(.*)", "dest": "/frontend/$1" }
-    ]
+    ],
+    "build": {
+    "env": {
+      "BABEL_DISABLE_CACHE": "1"
+      }
+    }
   }
   
