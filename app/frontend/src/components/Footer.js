@@ -14,7 +14,8 @@ function Footer () {
             <button className="button-small" onClick={toggleVisibility} 
                 style={{fontSize:16, padding:'0px 4px', borderRadius:'24px'}}>❤</button>
             {isVisible &&
-                <h3 style={{fontSize:12, textAlign:'left', width:'30%', margin:'0 auto'}}>
+                <h3 style={{fontSize:12, textAlign:'left', 
+                width:'30%', margin:'0 auto', userSelect:'auto'}}>
                     <br/>
                     Details for Nerds:<br/>
                     Backend:{"{"}python with Flask{"}"} <br/>
@@ -22,7 +23,8 @@ function Footer () {
                     Host:{"{"}Vercel{"}"} 
                     </h3>}
             {isVisible && <p style={{
-                fontSize:12
+                fontSize:12,
+                userSelect:'auto'
             }}>
                 <br/>
                 Inspiration for this project was found through <a href="https://www.youtube.com/@DataProfessor">

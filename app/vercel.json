@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "backend/api/*.py", "use": "@vercel/python", 
+        "config": {
+            "maxDuration": 60
+        }
+      },
+      { "src": "frontend/package.json", "use": "@vercel/static-build", 
+        "config": {
+            "distdir": "frontend/build"
+        }
+      }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "backend/api/app.py" },
+      { "src": "/(.*)", "dest": "/frontend/$1" }
+    ]
+  }
+  

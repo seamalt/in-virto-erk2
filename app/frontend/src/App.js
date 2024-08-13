@@ -37,30 +37,38 @@ function App() {
 
     return (
         <div className = "App">
-            <div className = "Heading" style={{textAlign: 'center', margin: "0 auto" }}>
+            <div className = "Heading" style={{textAlign: 'center', margin: "0 auto", userSelect:'none'}}>
                 <img
                     src={`${process.env.PUBLIC_URL}/logo192.png`}
-                    style={{ width: '50px', height: '50px', verticalAlign: 'center', marginRight: '10px' }}
+                    style={{ width: '50px', height: '50px', 
+                        verticalAlign: 'center', marginRight: '10px',
+                        userSelect: 'none' }}
                 />
                 <h1 type="Logo" style={{display:'inline-block', verticalAlign: 'center', padding:'0px', marginBottom:'0px'}}>"in-virto" enzyme analysis</h1>
+                <img
+                    src={`${process.env.PUBLIC_URL}/logo192.png`}
+                    style={{ width: '50px', height: '50px', 
+                        verticalAlign: 'center', marginLeft: '10px', userSelect: 'none'
+                     }}
+                />
             </div>
             <p type="logo" style={{marginTop:'0px'}}>a virtual drug discovery tool</p>
             <h1>Random Forest Bioactivity Predictor: <space/>
-                <span>
+                <a href = "https://www.ncbi.nlm.nih.gov/gene/5594"><span>
                     Interactions with ERK2
-                </span>
+                </span></a>
+                
             </h1>
             <button className="button-small" onClick={ToggleAsked} 
                 style={{fontSize:16, padding:'0px 4px', borderRadius:'24px'}}>?</button>
             {asks &&
-            <h3>
+            <h3 style={{userSelect: 'auto'}}>
                 In drug discovery, it's important to identify candidates with high affinity
                 for the protein of interest. Here, I created a <b>RESTFul API</b> that uses a <b>random forest machine learning model</b> that takes
                 a drug's chemical composition (in SMILES format) and outputs predicted activity factors from valid entries.<br/>
                 <br/>
-                The target of interest is <b>ERK2</b>,
-                a major cell signalling protein involved in multiple forms of <a href="https://en.wikipedia.org/wiki/MAPK1">
-                cancers</a>.
+                The target of interest is <b>ERK2</b>, a major cell signalling protein from the MAPK pathway, which is involved in multiple
+                forms of <a href="https://en.wikipedia.org/wiki/MAPK1">cancers</a>.
                 <br/><br/>Here's what the activity predictors mean:
                 <ul style={{fontSize:14, textAlign:'left', width:'80%', margin:'0 auto'}}>
                     <li>IC50: the dose (in nM) that causes 50% interaction with the target species (or ERK2).</li>
@@ -73,14 +81,14 @@ function App() {
             </h3>
             }
             <InputForm onSubmit={handleSubmit} />
+            {loading && <p type="signal" style={{textAlign: 'center'}}>Loading SMILES to ML model...</p>}
             {parsed && <ResultDisplay result={result}/>}
             <p style = {{textAlign: 'center'}}>{parsed ? "Data parsed successfully!" : "No data parsed yet."}</p>
-            <p  type = "signal"
-                style = {{textAlign: 'center'}}>
-                {loading ? "Loading SMILES to ML model...": ""}</p>
+            
             {/* {parsed && <Antibody/>} */}
             <p style={{textAlign: 'center'}}><a href="https://github.com/seamalt" style={{
-                color: '#95bed9', fontWeight: 800}}>made by seamalt.</a>
+                color: '#95bed9', fontWeight: 800}}>made by <span
+                style={{fontStyle:'normal'}}>seamalt</span>.</a>
             </p>
             <Footer/>
 

@@ -22,10 +22,12 @@ body {
     color: #000000;
     text-align: center;
     margin-bottom: 30px;
+    user-select: none;
   }
   
   h2 {
     color: #34495e;
+    user-select: none;
   }
 
   h3 {
@@ -33,6 +35,11 @@ body {
     font-size: 16px;
     color: #34495e;
     font-weight: 500;
+    user-select: none;
+  }
+
+  p {
+    user-select: none;
   }
 
   h1[type="logo"], p[type="logo"], span {
@@ -50,6 +57,7 @@ body {
 
   p[type=signal] {
     color: #cd90be;
+    user-select: none;
   }
   
   form {
@@ -59,6 +67,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(255, 255, 255, 0);
     margin-bottom: 20px;
+    user-select: none;
   }
   
   textarea {
@@ -92,13 +101,16 @@ body {
     margin: auto;
     width: fit-content;
     padding: 10px;
+
     background-color: #95bed9;
     color: #fff;
     border: none;
     border-radius: 4px;
+    transition: background-color 1.0s ease;
+
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 1.0s ease;
+    user-select: none;
   }
 
   button[type=download]{
@@ -226,5 +238,10 @@ body {
   a {
     color:#cd90be;
     text-decoration: none;
+    transition: ease-in 0.5s
   }
 
+  a:hover {
+    color:#9d7ebd;
+    text-decoration: none;
+  }

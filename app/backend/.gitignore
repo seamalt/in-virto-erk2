@@ -1,0 +1,7 @@
+__pycache__/
+api/__pycache__/
+*.pyc
+instance/
+.env
+model.pkl
+.vercel
