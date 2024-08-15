@@ -1,10 +1,9 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:2001';
+// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 export const fetchData = async (input) => {
   console.log({input});
-  console.log('API URL:', process.env.REACT_APP_API_URL);
 
-  const response = await fetch(`${API_URL}/api/predict`, {
+  const response = await fetch(`/api/predict`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

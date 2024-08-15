@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -6,13 +6,19 @@ import rdkit
 from flask_cors import CORS
 from utils import to_fp, filter_bad_smiles, p_to_nm
 import os
+from waitress import serve
+import logging
+
 
 model = None
 
+logging.basicConfig(level=logging.DEBUG)
+
+
 # starts app
 def create_app():
-    app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:2000"}})
+    app = Flask(__name__, static_folder='/app/frontend/build')
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     with app.app_context():
         initialize_model()
     return app
@@ -26,13 +32,23 @@ def initialize_model():
 
 app = create_app()
 
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def present(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+
+
 #/predict is the URL path, can change
-@app.route('/api/predict', methods=['POST'])
-
-#md = None
-
+@app.route('/api/predict', methods=['POST', 'GET'])
 # takes in input 
 def predict():
+    print("Received a prediction request")
+    app.logger.info(f"Received request: {request.method} {request.path}")
     global model
     initialize_model()
     if model is None:
@@ -91,4 +107,6 @@ def run_model(smiles):
 
 #flask port for local testing
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get('PORT', 2001)))
+    port=int(os.environ.get('PORT', 8080))
+    logging.info(f"Starting server on port {port}")
+    serve(app, host="0.0.0.0", port=port)

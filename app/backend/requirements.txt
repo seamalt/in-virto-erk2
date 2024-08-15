@@ -8,5 +8,6 @@ Werkzeug==2.2
 padelpy==0.1.13
 rdkit==2024.03.5
 flask-cors
+waitress
 #threading is built-in
 #pickle is built-in 
