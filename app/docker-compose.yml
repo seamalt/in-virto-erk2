@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "2001:2001"
+    networks:
+      - erk2-app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "2000:2000"
+    networks:
+      - erk2-app
+    environment:
+      - REACT_APP_API_URL=http://localhost:2001
+
+networks:
+  erk2-app:
+    driver: bridge

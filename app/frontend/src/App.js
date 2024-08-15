@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-//import Header from './components/Header';
 import Footer from './components/Footer';
 import InputForm from './components/InputForm';
 import ResultDisplay from './components/ResultDisplay';
 import {fetchData} from "./api";
 import Antibody from './components/Antibody';
 import './App.css';
-// import favicon from '../public/favicon.png';
 
 
 function App() {
@@ -53,7 +51,7 @@ function App() {
                 />
             </div>
             <p type="logo" style={{marginTop:'0px'}}>a virtual drug discovery tool</p>
-            <h1>Random Forest Bioactivity Predictor: <space/>
+            <h1>Random Forest Bioactivity Predictor: &nbsp;
                 <a href = "https://www.ncbi.nlm.nih.gov/gene/5594"><span>
                     Interactions with ERK2
                 </span></a>

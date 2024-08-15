@@ -3,18 +3,16 @@ import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 import rdkit
-#from flask_cors import CORS
+from flask_cors import CORS
 from utils import to_fp, filter_bad_smiles, p_to_nm
-import threading
-
+import os
 
 model = None
-model_lock = threading.Lock()
-
 
 # starts app
 def create_app():
     app = Flask(__name__)
+    CORS(app, resources={r"/api/*": {"origins": "http://localhost:2000"}})
     with app.app_context():
         initialize_model()
     return app
@@ -26,28 +24,19 @@ def initialize_model():
     model = joblib.load('model.pkl')
     print("model initialized.")
 
-
-#locks the model to one-thread to load, unlocks after restart
-#subsequent requests can now use model if loaded (until it is unloaded)
-#decreases init time
-def restart_model():
-    global model
-    if model is None:
-        with model_lock:
-            print("restarting model with locked thread:")
-            if model is None:
-                initialize_model()
-    return model
-
-
 app = create_app()
 
 #/predict is the URL path, can change
 @app.route('/api/predict', methods=['POST'])
+
+#md = None
+
 # takes in input 
 def predict():
     global model
+    initialize_model()
     if model is None:
+        print("model not initialized")
         return jsonify({"error": "Model not initialized"}), 503
     json_resp = request.json
     if not json_resp:
@@ -82,14 +71,6 @@ def run_model(smiles):
 
     #predicts the pIC50
     pIC50_pred = model.predict(fingerprints)
-
-    #for future: provide functionality that separates 
-    # input based on elapsed time (<60s) and then 
-    # runs model several times, (taking prevInput)
-    # (as an input to the next run_model to allow static quality), 
-    # parses responses together and sends back after api request
-
-
     print("model loaded")
 
     IC50 = p_to_nm(pIC50_pred)
@@ -106,5 +87,8 @@ def run_model(smiles):
     
     return output
 
-# if __name__ == '__main__':
-#     app.run()
+
+
+#flask port for local testing
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get('PORT', 2001)))
