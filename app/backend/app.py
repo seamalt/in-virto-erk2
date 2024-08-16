@@ -7,13 +7,8 @@ from flask_cors import CORS
 from utils import to_fp, filter_bad_smiles, p_to_nm
 import os
 from waitress import serve
-import logging
-
 
 model = None
-
-logging.basicConfig(level=logging.DEBUG)
-
 
 # starts app
 def create_app():
@@ -22,8 +17,6 @@ def create_app():
     with app.app_context():
         initialize_model()
     return app
-# provides added security
-#CORS(app)
 
 def initialize_model():
     global model
@@ -32,7 +25,7 @@ def initialize_model():
 
 app = create_app()
 
-# Serve React App
+# serves react app on flask
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def present(path):
@@ -43,16 +36,16 @@ def present(path):
 
 
 
-#/predict is the URL path, can change
+#/predict is the URL path for API requests
 @app.route('/api/predict', methods=['POST', 'GET'])
 # takes in input 
 def predict():
-    print("Received a prediction request")
-    app.logger.info(f"Received request: {request.method} {request.path}")
+    # print("Received a prediction request")
     global model
-    initialize_model()
+    # initialize_model()
     if model is None:
-        print("model not initialized")
+        # print("model not initialized")
+        initialize_model()
         return jsonify({"error": "Model not initialized"}), 503
     json_resp = request.json
     if not json_resp:
@@ -60,15 +53,15 @@ def predict():
     
     try:
         data = json_resp['input']
-        print("data in format: ", data)
+        # print("data in format: ", data)
+        data = data.replace("\n", "")
         data = data.replace(" ", "")
         mols = data.split(",")
-        print("data in format", mols)
-        print("data in format", mols)
+        # print("data in format", mols)
         result = run_model(mols)
-        print("data in format:", result)
+        # print("data in format:", result)
         result = result.to_json()
-        print("data in format:", result)
+        # print("data in format:", result)
         return jsonify({'prediction': result})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -77,20 +70,20 @@ def predict():
 # current implementation only takes in comma separated list as input
 def run_model(smiles):
     #exception expected when bad input is given
-    print("entered run model")
+    # print("entered run model")
     smiles = filter_bad_smiles(smiles)
-    print("filtered", smiles)
+    # print("filtered", smiles)
     fingerprints = to_fp(smiles)
     fingerprints = pd.DataFrame(fingerprints)
-    print("padelified")
+    # print("padelified")
     #model = load_model()
 
     #predicts the pIC50
     pIC50_pred = model.predict(fingerprints)
-    print("model loaded")
+    # print("model loaded")
 
     IC50 = p_to_nm(pIC50_pred)
-    print("p to reg")
+    # print("p to reg")
 
     output = pd.DataFrame({
         'smiles' : smiles,
@@ -108,5 +101,4 @@ def run_model(smiles):
 #flask port for local testing
 if __name__ == '__main__':
     port=int(os.environ.get('PORT', 8080))
-    logging.info(f"Starting server on port {port}")
     serve(app, host="0.0.0.0", port=port)

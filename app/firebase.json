@@ -1,0 +1,12 @@
+{
+    "hosting": {
+      "redirects": [
+        {
+          "source": "/invirto",
+          "destination": "https://in-virto-erk2.web.app/",
+          "type": 301
+        }
+      ]
+    }
+  }
+  

@@ -1,38 +1,35 @@
-FROM ubuntu:22.04
+# Build React frontend using Node.js
+FROM node:18 AS frontend-build
 
-# automatically installs java (for padelpy), python, NodeJs
-ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /app/frontend
+
+# Copy frontend files and install dependencies
+COPY frontend/ ./
+RUN npm install
+RUN npm run build
+
+# Python runtime environment for Flask with Java JDK (for padelpy)
+FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y \
-    python3.11 \
-    python3-pip \
-    nodejs \
-    npm \
-    openjdk-17-jdk \
-    && apt-get clean \
+    default-jdk \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-RUN [ ! -e /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python || true && \
-    [ ! -e /usr/bin/pip ] && ln -s /usr/bin/pip3 /usr/bin/pip || true
-
-
 WORKDIR /app
 
-# Build React app in frontend
-COPY frontend/ ./frontend/
-WORKDIR /app/frontend
-RUN npm install && npm run build
-
-# Copy backend files and dependencies, move to backend
-WORKDIR /app
 COPY backend/ ./backend/
+
+# Install Python libraries
 WORKDIR /app/backend
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY --from=frontend-build /app/frontend/build /app/frontend/build
+
+# Flask running on port 8080
 EXPOSE 8080
 
-# Run Flask
 CMD ["python", "app.py"]
 
 LABEL author="Saanvi Molugu"
-LABEL description="Runs react frontend and flask backend"
+LABEL description="Runs React frontend and Flask backend"
